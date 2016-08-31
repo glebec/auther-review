@@ -1,4 +1,7 @@
-'use strict'; 
+'use strict';
+
+var session = require('express-session');
+var _ = require('lodash');
 
 var router = require('express').Router();
 
@@ -12,6 +15,22 @@ router.use(function (req, res, next) {
     req.body = eval('(' + bodyString + ')');
     next();
   });
+});
+
+router.use(session({
+  secret: 'wingardiumLeviosa',
+  resave: false,
+  saveUnitialized: false
+}));
+
+var oldSession;
+
+router.use(function (req, res, next) {
+  if (!_.isEqual(req.session, oldSession)) {
+    oldSession = req.session;
+    console.log('Different/changed session', req.session);
+  }
+  next();
 });
 
 module.exports = router;

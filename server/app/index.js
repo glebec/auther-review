@@ -7,6 +7,12 @@ app.use(require('./logging.middleware'));
 
 app.use(require('./request-state.middleware'));
 
+app.use('/api', function (req, res, next) {
+  if (!req.session.counter) req.session.counter = 0;
+  console.log('counter', ++req.session.counter);
+  next();
+});
+
 app.use('/api', require('../api/api.router'));
 
 var validFrontendRoutes = ['/', '/stories', '/users', '/stories/:id', '/users/:id', '/signup', '/login'];
