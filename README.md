@@ -1,5 +1,7 @@
 # auther
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/glebec/auther-review.svg)](https://greenkeeper.io/)
+
 Ensure that `postgres` is running (e.g. by trying to start a `psql` shell).
 
 Run `npm install`, then `npm run seed` to seed the database with fake data.
